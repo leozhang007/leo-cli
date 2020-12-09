@@ -1,0 +1,67 @@
+{
+  "name": "leo-cli",
+  "version": "0.1.0",
+  "description": "A scaffolding tool for study",
+  "keywords": [
+    "scaffolding",
+    "generator",
+    "cli",
+    "typescript",
+    "jest",
+    "node"
+  ],
+  "homepage": "https://github.com/leozhang007/leo-cli",
+  "bugs": {
+    "url": "https://github.com/leozhang007/leo-cli/issues"
+  },
+  "repository": {},
+  "license": "MIT",
+  "author": {
+    "name": "leozhang",
+    "email": "117000082@qq.com"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": "bin/leo",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "clean": "rimraf lib",
+    "lint": "eslint src",
+    "compile": "tsc",
+    "build": "run-s clean lint compile",
+    "test": "jest",
+    "cov": "jest --coverage",
+    "prepare": "run-s build test"
+  },
+  "eslintConfig": {
+    "extends": "standard-ts"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "cac": "^6.6.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.17",
+    "@types/node": "^14.14.10",
+    "eslint": "^7.15.0",
+    "eslint-config-standard-ts": "^19.0.1",
+    "jest": "^26.6.3",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}
