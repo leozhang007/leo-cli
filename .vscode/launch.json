@@ -12,7 +12,7 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/bin/leo",
-      "args": ["list", "leozhang007", "json", "short"],
+      "args": ["template", "test-template"],
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]
