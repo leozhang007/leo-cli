@@ -2,7 +2,7 @@ import cac from 'cac'
 import init, { list } from '.'
 import { name, version } from '../package.json'
 
-const onError = (err: Error) => {
+const onError = (err: Error): void => {
   console.error(err.message)
   process.exit(1)
 }
@@ -15,8 +15,8 @@ const cli = cac(name)
 cli
   .command('<template> [project]', 'Create new project from a template')
   .option('-o, --offline', 'Try to use an offline template')
-  .example(name => ` $ ${name} <template> [project] # with an official template`)
-  .example(name => ` $ ${name} <owner>/<repo> [project] # with a github repo`)
+  .example(name => `  $ ${name} <template> [project] # with an official template`)
+  .example(name => `  $ ${name} <owner>/<repo> [project] # with a github repo`)
   .action(init)
 
 cli
@@ -27,6 +27,7 @@ cli
   .option('-s, --short', 'Output with short format')
   .action(list)
 
+// Listen to unknown commands
 cli.on('command:*', () => {
   throw new Error('Invalid command: ' + cli.args.join(' '))
 })
