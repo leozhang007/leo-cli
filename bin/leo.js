@@ -12,7 +12,7 @@ const devMode = fs.existsSync(project)
 const wantsCompiled = process.argv.indexOf('--compiled-build') >= 0
 
 if (!devMode || wantsCompiled) {
-  process.argv = process.argv.filter(i => i != '--compiled-build')
+  process.argv = process.argv.filter(i => i !== '--compiled-build')
   // import cli from the compiled
   // run the CLI with the current process arguments
   require('../lib/cli')

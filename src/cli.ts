@@ -2,14 +2,6 @@ import cac from 'cac'
 import init, { list } from '.'
 import { name, version } from '../package.json'
 
-const onError = (err: Error): void => {
-  console.error(err.message)
-  process.exit(1)
-}
-
-process.on('uncaughtException', onError)
-process.on('unhandledRejection', onError)
-
 const cli = cac(name)
 
 cli
@@ -17,29 +9,27 @@ cli
   .option('-f, --force', 'Overwrite if the target exists')
   .option('-o, --offline', 'Try to use an offline template')
   // .allowUnknownOptions() // for prompts override.
-  .example(name => `  $ ${name} <template> [project] # with an official template`)
-  .example(name => `  $ ${name} <owner>/<repo> [project] # with a github repo`)
+  .example('  # with an official template')
+  .example(`  $ ${name} <template> [project]`)
+  .example('  # with a custom github repo')
+  .example(`  $ ${name} <owner>/<repo> [project]`)
   .action(init)
 
 cli
   .command('list [owner]', 'Show all available templates')
   .alias('ls')
-  .option('-c, --cache', 'Show all cached templates')
   .option('-j, --json', 'Output with json format')
   .option('-s, --short', 'Output with short format')
   .action(list)
 
 cli.help().version(version).parse()
 
-// useless because default command
-// // Listen to unknown commands
-// cli.on('command:*', () => {
-//   throw new Error('Invalid command: ' + cli.args.join(' ') + '.')
-// })
-
-// use uncaughtException & unhandledRejection instead
 // https://github.com/cacjs/cac#error-handling
-// cli.runMatchedCommand().catch(err => {
-//   console.error(err.message)
-//   process.exit(1)
-// })
+/* istanbul ignore next */
+const onError = (err: Error): void => {
+  console.error(err.message)
+  process.exit(1)
+}
+
+process.on('uncaughtException', onError)
+process.on('unhandledRejection', onError)

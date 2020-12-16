@@ -15,13 +15,6 @@ export interface Options {
 }
 
 /**
- * Hook function.
- */
-export type HookFunction = (ctx: Context) => any
-// @typescript-eslint/no-invalid-void-type
-// export type HookFunction = (ctx: Context) => void | string | Promise<void | string>
-
-/**
  * Template config.
  */
 export interface Template {
@@ -56,19 +49,27 @@ export interface Template {
   /**
    * Auto install dependencies.
    */
-  install?: false | 'npm' | 'yarn'
+  install?: false | 'npm' | 'yarn' | 'pnpm'
   /**
    * Auto init git repository.
    */
   init?: boolean
   /**
-   * Template setup hook.
+   * Template setup hook, execute after template loaded & inquire completed.
    */
-  setup?: HookFunction
+  setup?: (ctx: Context) => Promise<void>
+  /**
+   * Template prepare hook, execute after template files prepare, before rename & render.
+   */
+  prepare?: (ctx: Context) => Promise<void>
+  /**
+   * Template emit hook, execute after all files emit to the destination.
+   */
+  emit?: (ctx: Context) => Promise<void>
   /**
    * Template all completed.
    */
-  complete?: HookFunction | string
+  complete?: ((ctx: Context) => string | Promise<string> | Promise<void>) | string
 }
 
 /**
@@ -89,6 +90,9 @@ export interface File {
   contents: Buffer
 }
 
+/**
+ * Creator context.
+ */
 export interface Context {
   /**
    * Template name.
@@ -106,7 +110,7 @@ export interface Context {
    */
   readonly project: string
   /**
-   * More options.
+   * More options, most of the cases come from CLI..
    */
   readonly options: Options & Record<string, any>
   /**

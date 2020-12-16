@@ -117,6 +117,17 @@ export const write = async (input: string, contents: string | Uint8Array): Promi
 }
 
 /**
+ * Detect buffer is binary.
+ * @param input buffer
+ */
+export const isBinary = (input: Uint8Array): boolean => {
+  // Detect encoding
+  // 65533 is the unknown char
+  // 8 and below are control chars (e.g. backspace, null, eof, etc)
+  return input.some(item => item === 65533 || item <= 8)
+}
+
+/**
  * Tildify absolute path.
  * @param input absolute path
  * @see https://github.com/sindresorhus/tildify
@@ -135,14 +146,16 @@ export const tildify = (input: string): string => {
 }
 
 /**
- * Untildify absolute path.
- * @param input absolute path
+ * Untildify tilde path.
+ * @param input tilde path
  * @see https://github.com/sindresorhus/untildify
  */
 export const untildify = (input: string): string => {
   const home = os.homedir()
 
-  return input.replace(/^~(?=$|\/|\\)/, home)
+  input = input.replace(/^~(?=$|\/|\\)/, home)
+
+  return path.normalize(input)
 }
 
 /**
@@ -158,10 +171,8 @@ export const extract = async (input: string, output: string, strip = 0): Promise
     onEntry: entry => {
       if (strip === 0) return
       const items = entry.fileName.split(/\/|\\/)
-      const start = Math.min(items.length, strip)
-      // console.log('->', entry.fileName)
+      const start = Math.min(strip, items.length - 1)
       entry.fileName = items.slice(start).join('/')
-      // console.log('<-', entry.fileName)
     }
   })
 }

@@ -1,18 +1,16 @@
 import { config } from '../core'
-import { local, remote } from './fetch'
+import fetch from './fetch'
 
 export interface ListOptions {
-  cache?: boolean
   json?: boolean
   short?: boolean
 }
 
 /**
  * Show all available templates.
- * @todo local template list
  */
 export default async (owner: string = config.official, options: ListOptions = {}): Promise<void> => {
-  const results = await (options.cache ?? false ? local(owner) : remote(owner))
+  const results = await fetch(owner)
 
   const isOfficial = owner === config.official
 
@@ -23,7 +21,7 @@ export default async (owner: string = config.official, options: ListOptions = {}
 
   // short output
   if (options.short ?? false) {
-    return results.forEach(i => console.log(`→ ${isOfficial ? i.name : i.fullName}`))
+    return results.forEach(i => console.log(`→ ${isOfficial ? i.name : i.fullname}`))
   }
 
   // full mode
@@ -32,7 +30,7 @@ export default async (owner: string = config.official, options: ListOptions = {}
   }
 
   console.log(`Available ${isOfficial ? 'official' : owner}'s templates:`)
-  const infos = results.map(i => [isOfficial ? i.name : i.fullName, i.description])
+  const infos = results.map(i => [isOfficial ? i.name : i.fullname, i.description])
   const width = Math.max(5, ...infos.map(i => i[0].length))
   const gap = (name: string): string => ' '.repeat(width - name.length)
   infos.forEach(([name, desc]) => console.log(`  → ${name} ${gap(name)} ${desc}`))
