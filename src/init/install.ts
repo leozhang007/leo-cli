@@ -5,7 +5,7 @@ import { Context } from './types'
  * Execute `npm | yarn install` command.
  */
 export default async (ctx: Context): Promise<void> => {
-  if (ctx.config.install == null || ctx.config.install === false) return
+  if (ctx.config.install == null || !ctx.config.install) return
 
   // Installing dependencies...
 
@@ -15,7 +15,7 @@ export default async (ctx: Context): Promise<void> => {
   await new Promise((resolve, reject) => {
     const child = spawn(cmd, ['install'], { cwd: ctx.dest, stdio: 'inherit' })
     child.on('error', reject).on('exit', code => {
-      if (code === 0) return resolve('')
+      if (code === 0) return resolve()
       reject(new Error('Install dependencies failed.'))
     })
   })

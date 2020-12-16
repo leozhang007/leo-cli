@@ -4,7 +4,7 @@ import { Context } from './types'
 const command = (args: string[], cwd: string) => new Promise((resolve, reject) => {
   const child = spawn('git',args, { cwd, stdio: 'inherit' })
   child.on('error', reject).on('exit', code => {
-    if (code === 0) return resolve('12')
+    if (code === 0) return resolve()
     reject(new Error('Initial repository failed.'))
   })
 })
