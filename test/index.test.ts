@@ -1,10 +1,10 @@
-import * as leo from '../src'
+import * as caz from '../src'
 
 test('unit', async () => {
-  expect(typeof leo.file).toBe('object')
-  expect(typeof leo.http).toBe('object')
-  expect(typeof leo.config).toBe('object')
-  expect(typeof leo.Ware).toBe('function')
-  expect(typeof leo.list).toBe('function')
-  expect(typeof leo.default).toBe('function')
+  expect(typeof caz.file).toBe('object')
+  expect(typeof caz.http).toBe('object')
+  expect(typeof caz.config).toBe('object')
+  expect(typeof caz.Ware).toBe('function')
+  expect(typeof caz.list).toBe('function')
+  expect(typeof caz.default).toBe('function')
 })
