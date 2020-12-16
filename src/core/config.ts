@@ -17,8 +17,12 @@ const parseIni = (filename: string): Record<string, any> | undefined => {
 
 const defaults = {
   registry: 'https://github.com/{owner}/{name}/archive/{branch}.zip',
-  official: 'leo-templates',
-  branch: 'master'
+  official: 'caz-templates',
+  branch: 'master',
+  // github application
+  // https://developer.github.com/v3/guides/basics-of-authentication
+  clientId: 'c07ff4d0cbddbfe57545',
+  clientSecret: '19484a928f48768a8329d6cb11ab020625dc86c3'
 }
 
 const config = parseIni(path.join(os.homedir(), `.${name}rc`))

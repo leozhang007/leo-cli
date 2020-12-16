@@ -23,8 +23,8 @@ export const exists = async (input: string): Promise<false | 'file' | 'dir' | 'o
     if (err.code !== 'ENOENT') {
       throw err
     }
+    return false
   }
-  return false
 }
 
 /**
@@ -69,7 +69,7 @@ export const mkdir = async (input: string, options?: fs.MakeDirectoryOptions): P
  * @param input input path
  * @todo https://github.com/sindresorhus/trash
  */
-export const remove = async (input: string, options?: fs.ReadSyncOptions): Promise<void> => {
+export const remove = async (input: string, options?: fs.RmDirAsyncOptions): Promise<void> => {
   const result = await exists(input)
 
   // not exists

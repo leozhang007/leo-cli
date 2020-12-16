@@ -27,13 +27,13 @@ export const remote = async (owner: string): Promise<Result[]> => {
 
   try {
     const url = new URL(`https://api.github.com/users/${owner}/repos`)
-    url.username = '0cb723972877555ffb54'
-    url.password = 'ad0638a75ee90bb86c8b551f5f42f3a044725f38'
+    url.username = config.clientId
+    url.password = config.clientSecret
     url.searchParams.append('type', 'owner')
     url.searchParams.append('sort', 'updated')
     url.searchParams.append('per_page', '100') // max 100
 
-    const response = await http.fetch(url.toString())
+    const response = await http.request(url.toString())
     const json = await response.json() as Repository[]
 
     spinner.stop()
