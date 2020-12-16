@@ -17,7 +17,7 @@ const parseIni = (filename: string): Record<string, any> | undefined => {
 
 const defaults = {
   registry: 'https://github.com/{owner}/{name}/archive/{branch}.zip',
-  official: 'zce-templates',
+  official: 'leo-templates',
   branch: 'master'
 }
 
@@ -28,9 +28,6 @@ export default {
   ...config,
   get npm () {
     return parseIni(path.join(os.homedir(), '.npmrc'))
-  },
-  get yarn () {
-    return parseIni(path.join(os.homedir(), '.yarnrc'))
   },
   get git () {
     return parseIni(path.join(os.homedir(), '.gitconfig'))
