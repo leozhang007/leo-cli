@@ -22,7 +22,7 @@
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "bin": "bin/leo.js",
+  "bin": "bin/lcz.js",
   "files": [
     "lib"
   ],

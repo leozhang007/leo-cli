@@ -3,7 +3,7 @@ let mockedList: jest.SpyInstance
 
 const mockArgv = (args: string[]): () => void => {
   const original = process.argv
-  process.argv = [original[0], require.resolve('../bin/caz'), ...args]
+  process.argv = [original[0], require.resolve('../bin/lcz'), ...args]
   return () => {
     process.argv = original
   }
@@ -60,7 +60,7 @@ test('unit:cli:help', async () => {
   const log = jest.spyOn(console, 'log').mockImplementation()
   await import('../src/cli')
   expect(log).toHaveBeenCalledTimes(1)
-  expect(log.mock.calls[0][0]).toContain('$ caz <template> [project]')
+  expect(log.mock.calls[0][0]).toContain('$ lcz <template> [project]')
   restore()
 })
 

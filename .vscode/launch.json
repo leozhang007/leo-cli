@@ -11,7 +11,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/bin/leo",
+      "program": "${workspaceFolder}/bin/lcz",
       "args": ["template", "src"],
       "outFiles": [
         "${workspaceFolder}/**/*.js"
