@@ -20,7 +20,7 @@
 
 <br>
 
-> fork: https://github.com/leozhang007/caz
+> fork: https://github.com/zce/caz
 ## Introduction
 
 CAZ (**C**reate **A**pp **Z**en)
